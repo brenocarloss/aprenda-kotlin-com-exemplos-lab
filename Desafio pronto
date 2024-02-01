@@ -1,0 +1,30 @@
+enum class Nivel { BASICO, INTERMEDIARIO, AVANCADO }
+
+data class Usuario(val nome: String, val email: String)
+
+data class ConteudoEducacional(var nome: String, val duracao: Int = 110)
+
+data class Formacao(val nome: String, val nivel: Nivel, val conteudos: MutableList<ConteudoEducacional>) {
+    val inscritos = mutableListOf<Usuario>()
+
+    fun matricular(usuario: Usuario) {
+        inscritos.add(usuario)
+        println("${usuario.nome} matriculado na formação $nome com o ${usuario.email}")
+    
+    }
+   
+}
+
+fun main() {
+    val usuario1 = Usuario("Breno", "email:breno@gmail.com")
+    val usuario2 = Usuario("May", "email:may@gmail.com")
+    val usuario3 = Usuario("José", "email:jose@gmail.com")
+
+    val formacao1 = Formacao("Introdução ao Kotlin", Nivel.BASICO, mutableListOf())
+	val formacao2 = Formacao("Classes e Objetos", Nivel.INTERMEDIARIO, mutableListOf())
+    val formacao3 = Formacao("Collections", Nivel.BASICO, mutableListOf())
+    
+    formacao2.matricular(usuario1)
+    formacao3.matricular(usuario2)
+    formacao1.matricular(usuario3)
+}
